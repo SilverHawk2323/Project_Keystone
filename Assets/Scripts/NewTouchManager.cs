@@ -39,7 +39,7 @@ public class NewTouchManager : MonoBehaviour
 
     private void Update()
     {
-        /*if (touchControls.Touch.TouchPress.WasPressedThisFrame())
+        /*if (touchControls.Touch.TouchPress.triggered)
         {
             HandleTouch();
         }*/
@@ -51,7 +51,7 @@ public class NewTouchManager : MonoBehaviour
     public void HandleTouch()
     {
         //if (touchControls.Touch.TouchPress.triggered) return;
-        Ray touchRay = _camera.ScreenPointToRay(touchControls.Touch.TouchPosition.ReadValue<Vector2>());
+        Ray touchRay = _camera.ScreenPointToRay(_screenPosition);
         //Vector2 touchPosition = touchControls.Touch.TouchPosition.ReadValue<Vector2>();
 
         if (Physics.Raycast(touchRay, out RaycastHit hit))

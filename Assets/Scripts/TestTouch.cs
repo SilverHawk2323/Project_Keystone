@@ -43,7 +43,8 @@ public class TestTouch : MonoBehaviour, I_Touchable
 
     public void OnTouchBegin(Vector2 touchPosition)
     {
-        Vector3 newPosition = mainCamera.ScreenToWorldPoint(touchPosition);
+        Vector3 screenCoordinates = new Vector3(touchPosition.x, touchPosition.y, mainCamera.nearClipPlane);
+        Vector3 newPosition = mainCamera.ScreenToWorldPoint(screenCoordinates);
 
         newPosition.z = 0;
 
