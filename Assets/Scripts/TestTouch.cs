@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TestTouch : MonoBehaviour
+public class TestTouch : MonoBehaviour, I_Touchable
 {
 
     public TouchManager _TouchManager;
@@ -39,5 +39,24 @@ public class TestTouch : MonoBehaviour
         Vector3 worldCoordinates = mainCamera.ScreenToWorldPoint(screenCoordinates);
         worldCoordinates.z = 0;
         transform.position = worldCoordinates;
+    }
+
+    public void OnTouchBegin(Vector2 touchPosition)
+    {
+        Vector3 newPosition = mainCamera.ScreenToWorldPoint(touchPosition);
+
+        newPosition.z = 0;
+
+        transform.position = newPosition;
+    }
+
+    public void OnTouchStay(Vector2 touchPosition)
+    {
+        
+    }
+
+    public void OnTouchEnd(Vector2 touchPosition)
+    {
+        
     }
 }
