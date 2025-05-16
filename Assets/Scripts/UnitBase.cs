@@ -77,7 +77,7 @@ public class UnitBase : MonoBehaviour
         if(targets.Count <= 0)
         {
             _agent.destination = enemyBase.transform.position;
-            if (Vector3.Distance(_agent.destination, transform.position) <= attackInfo.damageRange)
+            if (Vector3.Distance(_agent.destination, transform.position) < attackInfo.damageRange)
             {
                 Attack(enemyBase);
             }
@@ -130,6 +130,7 @@ public class UnitBase : MonoBehaviour
         if (currentHealth <= 0f)
         {
             isDead = true;
+            gameObject.SetActive(false);
         }
     }
 
@@ -151,15 +152,18 @@ public class UnitBase : MonoBehaviour
 
     public virtual void Attack(UnitBase attackTarget)
     {
-        if (attackTarget.isDead == false)
+        if (attackTarget.isDead == true)
         {
+            RemoveFromList(attackTarget);
             return;
         }
         if (!canAttack)
         {
             return;
         }
+        print("Dealt Damage");
         attackTarget.TakeDamage(attackInfo);
+        RemoveFromList(attackTarget);
     }
 
     public float GetCurrentHealth()
@@ -210,7 +214,7 @@ public class UnitBase : MonoBehaviour
     {
         if(other.gameObject.TryGetComponent<UnitBase>(out UnitBase enemy))
         {
-            if(enemy.teamNumber != teamNumber)
+            if(enemy.teamNumber != teamNumber && !targets.Contains(enemy))
             {
                 targets.Add(enemy);
             }
@@ -225,6 +229,14 @@ public class UnitBase : MonoBehaviour
             {
                 targets.Remove(enemy);
             }
+        }
+    }
+
+    private void RemoveFromList(UnitBase target)
+    {
+        if (targets.Contains(target) && target.isDead == true)
+        {
+            targets.Remove(target);
         }
     }
 }
