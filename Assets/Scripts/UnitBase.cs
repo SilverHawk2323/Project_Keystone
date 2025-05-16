@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum MovementModes
 {
@@ -7,6 +9,7 @@ public enum MovementModes
     Running,
 }
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class UnitBase : MonoBehaviour
 {
     [Header("Health Variables")]
@@ -14,6 +17,7 @@ public class UnitBase : MonoBehaviour
     public float maxHealth;
     public float currentShield;
     public float maxShield;
+    
     [Header("Speed Variables")]
     [SerializeField] private float movementSpeed;
     [Tooltip("Determines the speed of the unit.")]
@@ -22,11 +26,30 @@ public class UnitBase : MonoBehaviour
     [Tooltip("Holds the variables for the unit's attack.")]
     public DamageInfo attackInfo;
     public bool isDead;
-    private float timeLastAttackMade;
+    protected float timeLastAttackMade;
     protected bool canAttack = true;
+    public List<UnitBase> targets = new List<UnitBase>();
+    public int teamNumber;
+    protected UnitBase enemyBase;
+    protected NavMeshAgent _agent;
+
+    protected void Awake()
+    {
+        canAttack = true;
+        _agent = GetComponent<NavMeshAgent>();
+        CommandBaseUnit[] bases = FindObjectsByType<CommandBaseUnit>(FindObjectsSortMode.None);
+        for (int i = 0; i < bases.Length; i++)
+        {
+            if(bases[i].GetTeamNumber() != teamNumber)
+            {
+                enemyBase = bases[i];
+                break;
+            }
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected void Start()
     {
         if(attackInfo.attackSpeed <= 0)
         {
@@ -39,7 +62,7 @@ public class UnitBase : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         //Once enough time has passed...
         if (Time.time > timeLastAttackMade + attackInfo.attackSpeed)
@@ -51,6 +74,33 @@ public class UnitBase : MonoBehaviour
         {
             canAttack = false;
         }
+        if(targets.Count <= 0)
+        {
+            _agent.destination = enemyBase.transform.position;
+            if (Vector3.Distance(_agent.destination, transform.position) <= attackInfo.damageRange)
+            {
+                Attack(enemyBase);
+            }
+        }
+        else
+        {
+            _agent.destination = targets[0].transform.position;
+            if (Vector3.Distance(_agent.destination, transform.position) <= attackInfo.damageRange)
+            {
+                Attack(targets[0]);
+            }
+        }
+        
+    }
+
+    public void SetTeamNumber(int teamNumber)
+    {
+        this.teamNumber = teamNumber;
+    }
+
+    public int GetTeamNumber()
+    {
+        return teamNumber;
     }
 
     public void TakeDamage(DamageInfo info)
@@ -154,5 +204,27 @@ public class UnitBase : MonoBehaviour
         }
 
         return damageAmount;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.TryGetComponent<UnitBase>(out UnitBase enemy))
+        {
+            if(enemy.teamNumber != teamNumber)
+            {
+                targets.Add(enemy);
+            }
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if(other.TryGetComponent<UnitBase>(out UnitBase enemy))
+        {
+            if(enemy.teamNumber != teamNumber)
+            {
+                targets.Remove(enemy);
+            }
+        }
     }
 }

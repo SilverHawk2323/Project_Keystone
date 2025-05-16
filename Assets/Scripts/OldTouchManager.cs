@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [DefaultExecutionOrder(-1)]
-public class TouchManager : MonoBehaviour
+public class OldTouchManager : MonoBehaviour
 {
     private TouchControls touchControls;
 
@@ -12,7 +12,7 @@ public class TouchManager : MonoBehaviour
     public event StartTouchEvent OnStartTouch;
     public delegate void EndTouchEvent(Vector2 position, float time);
     public event EndTouchEvent OnEndTouch;
-    public static TouchManager instance;
+    public static OldTouchManager instance;
 
     private bool _touchedObject;
 

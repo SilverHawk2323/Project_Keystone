@@ -7,12 +7,13 @@ public class PlayerManager : MonoBehaviour
     public int resources;
     public int currentCardAmount;
     public int CardsInDeck;
-    public List<CardBase> cards;
+    public List<ScriptableCardBase> cards;
+    public int teamNumber;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        DrawCards();
     }
 
     // Update is called once per frame
@@ -23,6 +24,9 @@ public class PlayerManager : MonoBehaviour
 
     public void DrawCards()
     {
-
+        foreach(var card in cards)
+        {
+            card.teamNumber = teamNumber;
+        }
     }
 }
