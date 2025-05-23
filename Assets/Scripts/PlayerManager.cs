@@ -7,8 +7,10 @@ public class PlayerManager : MonoBehaviour
     public int resources;
     public int currentCardAmount;
     public int CardsInDeck;
-    public List<ScriptableCardBase> cards;
+    public List<CardBase> cardsInHand = new List<CardBase>();
+    public List<CardBase> cardsInDeck = new List<CardBase>();
     public int teamNumber;
+    public Transform[] cardPositions;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,9 +26,15 @@ public class PlayerManager : MonoBehaviour
 
     public void DrawCards()
     {
-        foreach(var card in cards)
+        for (int i = 0; currentCardAmount < cardPositions.Length; i++)
         {
-            card.teamNumber = teamNumber;
+
+        }
+        foreach(var card in cardsInHand)
+        {
+            card.cardProperty.teamNumber = teamNumber;
+            card.transform.position = cardPositions[0].position;
+            card.transform.rotation = cardPositions[0].rotation;
         }
     }
 }

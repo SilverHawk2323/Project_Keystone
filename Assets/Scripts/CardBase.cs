@@ -26,7 +26,6 @@ public class CardBase : MonoBehaviour, I_Touchable
             card = value;
             cost = card.cost;
             unit = card.unit;
-            unit.teamNumber = card.teamNumber;
         }
     }
 
