@@ -53,6 +53,7 @@ public class CardBase : MonoBehaviour, I_Touchable
             {
                 Vector3 screenCoordinates = new Vector3(touchPosition.x, touchPosition.y, hit.transform.position.z);
                 Vector3 newPosition = mainCamera.ScreenToWorldPoint(screenCoordinates);
+                gm.playerManager.RemoveSpawnedCard(this);
                 SpawnUnit(hit.point);
             }
 

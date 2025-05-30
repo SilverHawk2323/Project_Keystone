@@ -165,9 +165,9 @@ MonoBehaviour:
   movementSpeed: 3
   movementState: 2
   attackInfo:
-    damageAmount: 5
+    damageAmount: 2
     damageType: 1
-    damageRange: 3
+    damageRange: 10
     attackSpeed: 1
     canBeBlock: 0
   isDead: 0

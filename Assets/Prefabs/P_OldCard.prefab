@@ -118,7 +118,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4660177000441693243}
   - component: {fileID: 3421911602481742773}
-  - component: {fileID: 8276521388946603199}
   - component: {fileID: 3336978364012698867}
   m_Layer: 6
   m_Name: P_OldCard
@@ -126,7 +125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4660177000441693243
 RectTransform:
   m_ObjectHideFlags: 0
@@ -168,25 +167,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.11268467, y: 48.672974, z: 33.892445}
   m_Center: {x: -0.008752376, y: -0.0019836426, z: 0.061252594}
---- !u!114 &8276521388946603199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3961269999533385217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2839e05fd4716e4ab2cc4ddd904e7ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cost: 1
-  unit: {fileID: 0}
-  gm: {fileID: 0}
-  mask:
-    serializedVersion: 2
-    m_Bits: 128
-  card: {fileID: 11400000, guid: 69a97d4f588efff4083d33c4b133c7a0, type: 2}
 --- !u!114 &3336978364012698867
 MonoBehaviour:
   m_ObjectHideFlags: 0

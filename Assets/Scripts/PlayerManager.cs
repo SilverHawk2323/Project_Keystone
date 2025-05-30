@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class PlayerManager : MonoBehaviour
     public int resources;
     public int currentCardAmount;
     public int CardsInDeck;
-    public List<CardBase> cardsInHand = new List<CardBase>();
+    public CardBase[] cardsInHand;
     public List<CardBase> cardsInDeck = new List<CardBase>();
     public int teamNumber;
     public Transform[] cardPositions;
@@ -24,17 +25,34 @@ public class PlayerManager : MonoBehaviour
         
     }
 
+    [ContextMenu("Draw Cards")]
     public void DrawCards()
     {
-        for (int i = 0; currentCardAmount < cardPositions.Length; i++)
+        for(int x = 0; x < maxCardAmount; x++)
         {
-
+            if (!cardPositions[x].GetComponent<CardPosition>().spotTaken)
+            {
+                CardBase current = cardsInDeck[0];
+                cardsInDeck.Remove(current);
+                CardBase cardSpawned = Instantiate(current, cardPositions[x].position, Quaternion.Euler(0, -90, -90));
+                cardsInHand[x] = cardSpawned;
+                cardPositions[x].GetComponent<CardPosition>().spotTaken = true;
+                currentCardAmount++;
+            }
         }
+        int i = 0;
         foreach(var card in cardsInHand)
         {
             card.cardProperty.teamNumber = teamNumber;
-            card.transform.position = cardPositions[0].position;
-            card.transform.rotation = cardPositions[0].rotation;
+            i++;
         }
+    }
+
+    public void RemoveSpawnedCard(CardBase targetCard)
+    {
+        int i = Array.IndexOf(cardsInHand,targetCard);
+        print(i);
+        cardPositions[i].GetComponent<CardPosition>().spotTaken = false;
+        cardsInHand[i] = null;
     }
 }

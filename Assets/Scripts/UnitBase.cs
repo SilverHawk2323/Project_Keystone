@@ -164,6 +164,7 @@ public class UnitBase : MonoBehaviour
         print("Dealt Damage");
         attackTarget.TakeDamage(attackInfo);
         RemoveFromList(attackTarget);
+        timeLastAttackMade = Time.time;
     }
 
     public float GetCurrentHealth()

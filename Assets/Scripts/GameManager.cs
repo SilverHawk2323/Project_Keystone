@@ -16,10 +16,12 @@ public class GameManager : MonoBehaviour
     public static GameManager gm;
 
     public bool isGameOver = false;
+    public PlayerManager playerManager;
 
     private void Awake()
     {
         gm = gm == null ? gm: null;
+        playerManager = FindFirstObjectByType<PlayerManager>();
     }
 
     void Start()
