@@ -37,15 +37,7 @@ public class UnitBase : MonoBehaviour
     {
         canAttack = true;
         _agent = GetComponent<NavMeshAgent>();
-        CommandBaseUnit[] bases = FindObjectsByType<CommandBaseUnit>(FindObjectsSortMode.None);
-        for (int i = 0; i < bases.Length; i++)
-        {
-            if(bases[i].GetTeamNumber() != teamNumber)
-            {
-                enemyBase = bases[i];
-                break;
-            }
-        }
+        
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -58,6 +50,15 @@ public class UnitBase : MonoBehaviour
         if(currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
+        }
+        CommandBaseUnit[] bases = FindObjectsByType<CommandBaseUnit>(FindObjectsSortMode.None);
+        for (int i = 0; i < bases.Length; i++)
+        {
+            if (bases[i].GetTeamNumber() != teamNumber)
+            {
+                enemyBase = bases[i];
+                break;
+            }
         }
     }
 
