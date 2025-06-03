@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CardBase : MonoBehaviour, I_Touchable
+public abstract class CardBase : MonoBehaviour, I_Touchable
 {
     public int cost;
     public UnitBase unit;
@@ -58,16 +58,28 @@ public class CardBase : MonoBehaviour, I_Touchable
             {
                 Vector3 screenCoordinates = new Vector3(touchPosition.x, touchPosition.y, hit.transform.position.z);
                 Vector3 newPosition = mainCamera.ScreenToWorldPoint(screenCoordinates);
-                
+                switch (gm.state)
+                {
+                    case GameState.Deploy:
+                        gm.playerManager.RemoveSpawnedCard(this);
+                        SpawnUnit(hit.point);
+                        break;
+                    case GameState.Battle:
+                        gm.playerManager.RemoveSpawnedCard(this);
+                        UseAbility();
+                        break;
+                    case GameState.Pause:
+                        break;
+                    default:
+                        break;
+                }
                 if (gm.state == GameState.Battle)
                 {
-                    gm.playerManager.RemoveSpawnedCard(this);
-                    UseAbility();
+                    
                 }
                 else if (gm.state == GameState.Deploy)
                 {
-                    gm.playerManager.RemoveSpawnedCard(this);
-                    SpawnUnit(hit.point);
+                    
                 }
                 else
                 {
@@ -103,10 +115,7 @@ public class CardBase : MonoBehaviour, I_Touchable
 
     }
 
-    public virtual void UseAbility()
-    {
-        print("Use Ability");
-    }
+    public abstract void UseAbility();
 
     public void SetOriginalCardPosition(Transform positionInHand)
     {

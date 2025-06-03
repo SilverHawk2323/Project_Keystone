@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7745842474898468684}
   - component: {fileID: 2797262480616593484}
-  - component: {fileID: 2744008932440007932}
+  - component: {fileID: 782772623183377059}
   m_Layer: 6
   m_Name: P_WarriorCard
   m_TagString: Untagged
@@ -55,7 +55,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.12415376, y: 1.5436121, z: 0.8827437}
   m_Center: {x: -0.0014791936, y: 0.0037532449, z: -0.000523448}
---- !u!114 &2744008932440007932
+--- !u!114 &782772623183377059
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4226791858760613962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2839e05fd4716e4ab2cc4ddd904e7ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 027c9e274c8057c4b92f3e2c4218b1cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 0
