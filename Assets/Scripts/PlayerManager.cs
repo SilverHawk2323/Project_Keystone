@@ -5,9 +5,9 @@ using System;
 public class PlayerManager : MonoBehaviour
 {
     public int maxCardAmount = 6;
-    public int resources;
+    public int currentResources = 4;
+    private int maxResources = 4;
     public int currentCardAmount;
-    public int CardsInDeck;
     public CardBase[] cardsInHand;
     public List<CardBase> cardsInDeck = new List<CardBase>();
     public int teamNumber;
@@ -57,5 +57,13 @@ public class PlayerManager : MonoBehaviour
         print(i);
         cardPositions[i].GetComponent<CardPosition>().spotTaken = false;
         cardsInHand[i] = null;
+    }
+
+    public void DeployPhase()
+    {
+        DrawCards();
+        currentResources = maxResources;
+        maxResources++;
+        maxResources = Mathf.Clamp(maxResources, 4, 10);
     }
 }

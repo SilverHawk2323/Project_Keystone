@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [Header("UI Variables")]
     public TMP_Text timerText;
     public TMP_Text gameStateText;
+    public TMP_Text currentResourcesText;
     public Button endTurnButton;
     private void Awake()
     {
@@ -75,7 +76,8 @@ public class GameManager : MonoBehaviour
         gameStateText.text = "State: " + state;
         timer = 60f;
         endTurnButton.gameObject.SetActive(true);
-        playerManager.DrawCards();
+        playerManager.DeployPhase();
+        currentResourcesText.text = "Resources: " + playerManager.currentResources;
         enemyAI.SpawnEnemy();
     }
 
@@ -83,7 +85,7 @@ public class GameManager : MonoBehaviour
     {
         state = GameState.Battle;
         gameStateText.text = "State: " + state;
-        timer = 30f;
+        timer = 15f;
         endTurnButton.gameObject.SetActive(false);
     }
 

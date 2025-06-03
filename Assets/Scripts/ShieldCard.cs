@@ -8,5 +8,6 @@ public class ShieldCard : CardBase
         {
             unit.HealShield(4f);
         }
+        Destroy(gameObject);
     }
 }

@@ -58,32 +58,27 @@ public abstract class CardBase : MonoBehaviour, I_Touchable
             {
                 Vector3 screenCoordinates = new Vector3(touchPosition.x, touchPosition.y, hit.transform.position.z);
                 Vector3 newPosition = mainCamera.ScreenToWorldPoint(screenCoordinates);
-                switch (gm.state)
+                if(gm.playerManager.currentResources >= cost)
                 {
-                    case GameState.Deploy:
-                        gm.playerManager.RemoveSpawnedCard(this);
-                        SpawnUnit(hit.point);
-                        break;
-                    case GameState.Battle:
-                        gm.playerManager.RemoveSpawnedCard(this);
-                        UseAbility();
-                        break;
-                    case GameState.Pause:
-                        break;
-                    default:
-                        break;
-                }
-                if (gm.state == GameState.Battle)
-                {
-                    
-                }
-                else if (gm.state == GameState.Deploy)
-                {
-                    
-                }
-                else
-                {
-                    print("You can't do anything yet");
+                    switch (gm.state)
+                    {
+                        case GameState.Deploy:
+                            gm.playerManager.RemoveSpawnedCard(this);
+                            gm.playerManager.currentResources -= cost;
+                            gm.currentResourcesText.text = "Resources: " + gm.playerManager.currentResources;
+                            SpawnUnit(hit.point);
+                            break;
+                        case GameState.Battle:
+                            gm.playerManager.currentResources -= cost;
+                            gm.currentResourcesText.text = "Resources: " + gm.playerManager.currentResources;
+                            gm.playerManager.RemoveSpawnedCard(this);
+                            UseAbility();
+                            break;
+                        case GameState.Pause:
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 
             }

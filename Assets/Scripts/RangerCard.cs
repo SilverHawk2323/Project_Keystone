@@ -8,5 +8,6 @@ public class RangerCard : CardBase
         {
             unit.attackInfo.attackSpeed /= 2f;
         }
+        Destroy(gameObject);
     }
 }
