@@ -235,7 +235,7 @@ MonoBehaviour:
   attackInfo:
     damageAmount: 2
     damageType: 2
-    damageRange: 0.5
+    damageRange: 1
     attackSpeed: 2
     canBeBlock: 0
   isDead: 0

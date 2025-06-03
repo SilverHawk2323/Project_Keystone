@@ -38,6 +38,7 @@ public class PlayerManager : MonoBehaviour
                 cardsInDeck.Remove(current);
                 CardBase cardSpawned = Instantiate(current, cardPositions[x].position, Quaternion.Euler(0, -90, -90));
                 cardsInHand[x] = cardSpawned;
+                cardSpawned.SetOriginalCardPosition(cardPositions[x].transform);
                 cardPositions[x].GetComponent<CardPosition>().spotTaken = true;
                 currentCardAmount++;
             }

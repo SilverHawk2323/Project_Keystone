@@ -12,7 +12,6 @@ public enum MovementModes
 [RequireComponent(typeof(NavMeshAgent))]
 public class UnitBase : MonoBehaviour
 {
-    private GameManager gm;
     [Header("Health Variables")]
     [SerializeField] private float currentHealth;
     [SerializeField] private float maxHealth;
@@ -50,7 +49,6 @@ public class UnitBase : MonoBehaviour
     {
         canAttack = true;
         _agent = GetComponent<NavMeshAgent>();
-        gm = FindFirstObjectByType<GameManager>();
         
     }
 
@@ -82,14 +80,10 @@ public class UnitBase : MonoBehaviour
     protected void Update()
     {
         //if we're in the deploy or pause phase make sure the unit is set to idle and stop it from doing anything else in update.
-        if (gm.state == GameState.Deploy || gm.state == GameState.Pause)
+        if (GameManager.gm.state == GameState.Deploy || GameManager.gm.state == GameState.Pause)
         {
             movementModeProperty = MovementModes.Idle;
             return;
-        }
-        else
-        {
-            movementModeProperty = MovementModes.Running;
         }
         //Once enough time has passed...
         if (Time.time > timeLastAttackMade + attackInfo.attackSpeed)
@@ -103,6 +97,7 @@ public class UnitBase : MonoBehaviour
         }
         if(targets.Count <= 0)
         {
+            movementModeProperty = MovementModes.Running;
             _agent.destination = enemyBase.transform.position;
             if (Vector3.Distance(_agent.destination, transform.position) < attackInfo.damageRange)
             {
@@ -114,7 +109,12 @@ public class UnitBase : MonoBehaviour
             _agent.destination = targets[0].transform.position;
             if (Vector3.Distance(_agent.destination, transform.position) <= attackInfo.damageRange)
             {
+                movementModeProperty = MovementModes.Idle;
                 Attack(targets[0]);
+            }
+            else
+            {
+                movementModeProperty = MovementModes.Running;
             }
         }
         

@@ -7,7 +7,7 @@ public class CardBase : MonoBehaviour, I_Touchable
     public GameManager gm;
     protected static Camera mainCamera;
     private float distanceFromCamera;
-
+    private Transform cardStartPosition;
     public LayerMask mask;
 
     [SerializeField] private ScriptableCardBase card;
@@ -48,31 +48,37 @@ public class CardBase : MonoBehaviour, I_Touchable
         {
             return;
         }
+        transform.position = cardStartPosition.position;
         Ray ray = mainCamera.ScreenPointToRay(touchPosition);
         RaycastHit hit;
         gameObject.GetComponent<Collider>().enabled = false;
-        if (Physics.Raycast(ray, out hit, float.PositiveInfinity, mask))
+        if (Physics.Raycast(ray, out hit, 200f, mask))
         {
             if (hit.collider != null)
             {
                 Vector3 screenCoordinates = new Vector3(touchPosition.x, touchPosition.y, hit.transform.position.z);
                 Vector3 newPosition = mainCamera.ScreenToWorldPoint(screenCoordinates);
-                gm.playerManager.RemoveSpawnedCard(this);
+                
                 if (gm.state == GameState.Battle)
                 {
+                    gm.playerManager.RemoveSpawnedCard(this);
                     UseAbility();
                 }
                 else if (gm.state == GameState.Deploy)
                 {
+                    gm.playerManager.RemoveSpawnedCard(this);
                     SpawnUnit(hit.point);
                 }
                 else
                 {
                     print("You can't do anything yet");
                 }
+                
             }
-
         }
+        gameObject.GetComponent<Collider>().enabled = true;
+        
+
 
     }
 
@@ -93,11 +99,17 @@ public class CardBase : MonoBehaviour, I_Touchable
     {
         Destroy(gameObject);
         var unit = Instantiate(card.unit, new Vector3(spawnPosition.x, spawnPosition.y + 0.5f, spawnPosition.z), Quaternion.identity);
+        GameManager.gm.friendlyUnits.Add(unit);
 
     }
 
     public virtual void UseAbility()
     {
         print("Use Ability");
+    }
+
+    public void SetOriginalCardPosition(Transform positionInHand)
+    {
+        cardStartPosition = positionInHand;
     }
 }
