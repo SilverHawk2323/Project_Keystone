@@ -32,7 +32,8 @@ public class PlayerManager : MonoBehaviour
         {
             if (!cardPositions[x].GetComponent<CardPosition>().spotTaken)
             {
-                CardBase current = cardsInDeck[0];
+                //Get a random card in the deck
+                CardBase current = cardsInDeck[UnityEngine.Random.Range(0, cardsInDeck.Count)]; //Important to note, the system namespace and the UnityEngine namespace both have random, UnityEngine is the one we want.
                 if (current == null) return;
                 cardsInDeck.Remove(current);
                 CardBase cardSpawned = Instantiate(current, cardPositions[x].position, Quaternion.Euler(0, -90, -90));

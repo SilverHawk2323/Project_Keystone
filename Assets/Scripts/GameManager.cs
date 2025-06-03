@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum GameState
@@ -12,7 +13,7 @@ public class GameManager : MonoBehaviour
     public GameState state;
 
     private float timer;
-
+    public List<UnitBase> units = new List<UnitBase>();
     public static GameManager gm;
 
     public bool isGameOver = false;
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        state = GameState.Pause;
+        state = GameState.Deploy;
     }
 
     // Update is called once per frame

@@ -10,6 +10,6 @@ public class EnemyAI : MonoBehaviour
     public void SpawnEnemy()
     {
         var unitSpawned = Instantiate(units[Random.Range(0, units.Length)], spawnLocations[Random.Range(0, spawnLocations.Count)]);
-        unitSpawned.teamNumber = 2;
+        unitSpawned.SetTeamNumber(2);
     }
 }

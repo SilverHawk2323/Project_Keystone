@@ -12,16 +12,29 @@ public enum MovementModes
 [RequireComponent(typeof(NavMeshAgent))]
 public class UnitBase : MonoBehaviour
 {
+    private GameManager gm;
     [Header("Health Variables")]
-    public float currentHealth;
-    public float maxHealth;
-    public float currentShield;
-    public float maxShield;
+    [SerializeField] private float currentHealth;
+    [SerializeField] private float maxHealth;
+    [SerializeField] private float currentShield;
+    [SerializeField] private float maxShield;
     
     [Header("Speed Variables")]
     [SerializeField] private float movementSpeed;
     [Tooltip("Determines the speed of the unit.")]
-    public MovementModes movementState;
+    [SerializeField] private MovementModes _movementMode;
+    public MovementModes movementModeProperty
+    {
+        get
+        {
+            return _movementMode;
+        }
+        set 
+        {
+            _movementMode = value;
+            SetMovementSpeed(_movementMode);
+        }
+    }
     [Header("Attack Variables")]
     [Tooltip("Holds the variables for the unit's attack.")]
     public DamageInfo attackInfo;
@@ -29,7 +42,7 @@ public class UnitBase : MonoBehaviour
     protected float timeLastAttackMade;
     protected bool canAttack = true;
     public List<UnitBase> targets = new List<UnitBase>();
-    public int teamNumber;
+    [SerializeField] private int teamNumber;
     protected UnitBase enemyBase;
     protected NavMeshAgent _agent;
 
@@ -37,6 +50,7 @@ public class UnitBase : MonoBehaviour
     {
         canAttack = true;
         _agent = GetComponent<NavMeshAgent>();
+        gm = FindFirstObjectByType<GameManager>();
         
     }
 
@@ -51,6 +65,7 @@ public class UnitBase : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
+        
         CommandBaseUnit[] bases = FindObjectsByType<CommandBaseUnit>(FindObjectsSortMode.None);
         for (int i = 0; i < bases.Length; i++)
         {
@@ -60,11 +75,22 @@ public class UnitBase : MonoBehaviour
                 break;
             }
         }
+        movementModeProperty = _movementMode;
     }
 
     // Update is called once per frame
     protected void Update()
     {
+        //if we're in the deploy or pause phase make sure the unit is set to idle and stop it from doing anything else in update.
+        if (gm.state == GameState.Deploy || gm.state == GameState.Pause)
+        {
+            movementModeProperty = MovementModes.Idle;
+            return;
+        }
+        else
+        {
+            movementModeProperty = MovementModes.Running;
+        }
         //Once enough time has passed...
         if (Time.time > timeLastAttackMade + attackInfo.attackSpeed)
         {
@@ -195,20 +221,24 @@ public class UnitBase : MonoBehaviour
                 movementSpeed = 0f;
                 break;
         }
+        _agent.speed = movementSpeed;
     }
 
     public float ProcessedDamage(DamageType type, float damageAmount)
     {
+        //if the damage the unit takes is the same type as the damage it deals then deal the same amount of damage
         if (type == attackInfo.damageType)
         {
             return damageAmount;
         }
-        if ((type == DamageType.Melee && attackInfo.damageType == DamageType.Range) || (type == DamageType.Range && attackInfo.damageType == DamageType.Shield)
+        //if the damage the unit is taking is what it is weak against deal double damage
+        if ((type == DamageType.Melee && attackInfo.damageType == DamageType.Range) 
+            || (type == DamageType.Range && attackInfo.damageType == DamageType.Shield)
             || (type == DamageType.Shield && attackInfo.damageType == DamageType.Melee))
         {
             return damageAmount * 2f;
         }
-
+        //else return the damage amount without any changes
         return damageAmount;
     }
 
