@@ -77,7 +77,7 @@ public class UnitBase : MonoBehaviour
     }
 
     // Update is called once per frame
-    protected void Update()
+    protected virtual void Update()
     {
         //if we're in the deploy or pause phase make sure the unit is set to idle and stop it from doing anything else in update.
         if (GameManager.gm.state == GameState.Deploy || GameManager.gm.state == GameState.Pause)
@@ -130,7 +130,7 @@ public class UnitBase : MonoBehaviour
         return teamNumber;
     }
 
-    public void TakeDamage(DamageInfo info)
+    public virtual void TakeDamage(DamageInfo info)
     {
         //if the unit has shields deal damage to the shields first
         if (currentShield > 0f)

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     private float timer;
     public List<UnitBase> friendlyUnits = new List<UnitBase>();
     public static GameManager gm;
+    
 
     public bool isGameOver = false;
     public PlayerManager playerManager;
@@ -26,9 +27,14 @@ public class GameManager : MonoBehaviour
     public TMP_Text gameStateText;
     public TMP_Text currentResourcesText;
     public Button endTurnButton;
+    public GameObject pauseMenu;
+    public GameObject loseScreen;
+    public GameObject winScreen;
+    public GameObject GUI;
+
     private void Awake()
     {
-        gm = gm == null ? this: null;
+        gm = gm == null ? this: gm;
         playerManager = playerManager == null ? FindFirstObjectByType<PlayerManager>() : playerManager;
     }
 
@@ -40,6 +46,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if(!isGameOver || state != GameState.Pause)
         {
             TimerCountDown();
@@ -56,6 +63,7 @@ public class GameManager : MonoBehaviour
                     SetGameStateToDeploy();
                     break;
                 case GameState.Pause:
+                    SetGameStateToPause();
                     break;
                 default:
                     SetGameStateToDeploy();
@@ -91,7 +99,8 @@ public class GameManager : MonoBehaviour
 
     public void SetGameStateToPause()
     {
-        state = GameState.Pause;
+        pauseMenu.SetActive(true);
+        SetCursor(true);
         //timer = 0f;
     }
 
@@ -99,5 +108,39 @@ public class GameManager : MonoBehaviour
     {
         timer -= Time.deltaTime;
         
+    }
+
+    public void SetGameOverScreen(int baseTeamNumber)
+    {
+        if(baseTeamNumber == 2)
+        {
+            winScreen.SetActive(true);
+            SetCursor(true);
+        }
+        else
+        {
+            loseScreen.SetActive(true);
+            SetCursor(true);
+        }
+    }
+
+    public void SetCursor(bool cursorIsOn)
+    {
+        if (cursorIsOn)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
+
+    public void SetGUI(bool visibility)
+    {
+        GUI.SetActive(visibility);
+        SetCursor(true);
     }
 }

@@ -10,7 +10,8 @@ public class NewControlManager : MonoBehaviour
 
     private InputAction _dragAction;
     private InputAction _screenPositionAction;
-
+    private InputAction _pauseAction;
+    private GameState _lastGameState;
     private Vector2 _screenPosition;
     I_Touchable currentTouchable;
     private static Camera _camera;
@@ -35,12 +36,17 @@ public class NewControlManager : MonoBehaviour
         _camera = Camera.main;
         _dragAction = InputSystem.actions.FindAction("TouchPress");
         _screenPositionAction = InputSystem.actions.FindAction("TouchPosition");
+        _pauseAction = InputSystem.actions.FindAction("Pause");
         
     }
 
     private void Update()
     {
-        
+        if (_pauseAction.WasPressedThisFrame())
+        {
+            PauseGame();
+            Debug.Log("Pause Game");
+        }
         _screenPosition = _screenPositionAction.ReadValue<Vector2>();
         if (currentTouchable != null)
         {
@@ -81,5 +87,20 @@ public class NewControlManager : MonoBehaviour
                 //print(_screenPosition);
             }
         }
+    }
+
+    public void PauseGame()
+    {
+        if (GameManager.gm.pauseMenu.activeInHierarchy)
+        {
+            GameManager.gm.pauseMenu.SetActive(false);
+            GameManager.gm.state = _lastGameState;
+        }
+        else
+        {
+            _lastGameState = GameManager.gm.state;
+            GameManager.gm.state = GameState.Pause;
+        }
+            
     }
 }
