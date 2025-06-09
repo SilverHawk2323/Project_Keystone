@@ -17,6 +17,7 @@ public class UnitBase : MonoBehaviour
     [SerializeField] private float maxHealth;
     [SerializeField] private float currentShield;
     [SerializeField] private float maxShield;
+    //[SerializeField] private HealthBar _healthbar;
     
     [Header("Speed Variables")]
     [SerializeField] private float movementSpeed;
@@ -44,6 +45,7 @@ public class UnitBase : MonoBehaviour
     [SerializeField] private int teamNumber;
     protected UnitBase enemyBase;
     protected NavMeshAgent _agent;
+    public GameObject deathParticle;
 
     protected void Awake()
     {
@@ -63,7 +65,8 @@ public class UnitBase : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
-        
+        /*_healthbar.healthbarSlider.maxValue = maxHealth;
+        _healthbar.UpdateHealthBar(currentHealth);*/
         CommandBaseUnit[] bases = FindObjectsByType<CommandBaseUnit>(FindObjectsSortMode.None);
         for (int i = 0; i < bases.Length; i++)
         {
@@ -77,7 +80,7 @@ public class UnitBase : MonoBehaviour
     }
 
     // Update is called once per frame
-    protected virtual void Update()
+    protected void Update()
     {
         //if we're in the deploy or pause phase make sure the unit is set to idle and stop it from doing anything else in update.
         if (GameManager.gm.state == GameState.Deploy || GameManager.gm.state == GameState.Pause)
@@ -99,8 +102,9 @@ public class UnitBase : MonoBehaviour
         {
             movementModeProperty = MovementModes.Running;
             _agent.destination = enemyBase.transform.position;
-            if (Vector3.Distance(_agent.destination, transform.position) < attackInfo.damageRange)
+            if (Vector3.Distance(_agent.destination, transform.position) < attackInfo.damageRange + 2)
             {
+                movementModeProperty = MovementModes.Idle;
                 Attack(enemyBase);
             }
         }
@@ -157,6 +161,11 @@ public class UnitBase : MonoBehaviour
         if (currentHealth <= 0f)
         {
             isDead = true;
+            ParticleSystem[] deathVFX = deathParticle.GetComponents<ParticleSystem>();
+            foreach (ParticleSystem particle in deathVFX)
+            {
+                particle.Play(true);
+            }
             gameObject.SetActive(false);
         }
     }
@@ -177,7 +186,7 @@ public class UnitBase : MonoBehaviour
         currentShield = Mathf.Clamp(currentShield, 1f, maxShield);
     }
 
-    public virtual void Attack(UnitBase attackTarget)
+    public void Attack(UnitBase attackTarget)
     {
         if (attackTarget.isDead == true)
         {

@@ -1360,6 +1360,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 440714060871986711, guid: 44b6393e529ab23479d1dc5b84019ba8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 440714060871986711, guid: 44b6393e529ab23479d1dc5b84019ba8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512430034331782127, guid: 44b6393e529ab23479d1dc5b84019ba8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2800987865425010996, guid: 44b6393e529ab23479d1dc5b84019ba8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14
@@ -4499,6 +4511,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 440714060871986711, guid: 44b6393e529ab23479d1dc5b84019ba8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 440714060871986711, guid: 44b6393e529ab23479d1dc5b84019ba8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512430034331782127, guid: 44b6393e529ab23479d1dc5b84019ba8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2800987865425010996, guid: 44b6393e529ab23479d1dc5b84019ba8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.63
@@ -6261,6 +6285,7 @@ MonoBehaviour:
   loseScreen: {fileID: 1573291858}
   winScreen: {fileID: 1241551821}
   GUI: {fileID: 1575745777}
+  mc: {fileID: 244993647}
 --- !u!114 &2090016545
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -31,10 +31,12 @@ public class GameManager : MonoBehaviour
     public GameObject loseScreen;
     public GameObject winScreen;
     public GameObject GUI;
+    public Camera mc;
 
     private void Awake()
     {
         gm = gm == null ? this: gm;
+        mc = Camera.main;
         playerManager = playerManager == null ? FindFirstObjectByType<PlayerManager>() : playerManager;
     }
 
@@ -112,15 +114,20 @@ public class GameManager : MonoBehaviour
 
     public void SetGameOverScreen(int baseTeamNumber)
     {
+        SetGUI(false);
         if(baseTeamNumber == 2)
         {
             winScreen.SetActive(true);
             SetCursor(true);
+            state = GameState.Pause;
+            isGameOver = true;
         }
         else
         {
             loseScreen.SetActive(true);
             SetCursor(true);
+            state = GameState.Pause;
+            isGameOver = true;
         }
     }
 
