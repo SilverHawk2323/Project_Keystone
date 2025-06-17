@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit Game :(
+  m_text: Quit Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1167,7 +1167,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You Lost T^T
+  m_text: You Lost
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1378,7 +1378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2800987865425010996, guid: 44b6393e529ab23479d1dc5b84019ba8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1930561
+      value: -2.75
       objectReference: {fileID: 0}
     - target: {fileID: 2800987865425010996, guid: 44b6393e529ab23479d1dc5b84019ba8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4638,7 +4638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2800987865425010996, guid: 44b6393e529ab23479d1dc5b84019ba8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1930561
+      value: -2.75
       objectReference: {fileID: 0}
     - target: {fileID: 2800987865425010996, guid: 44b6393e529ab23479d1dc5b84019ba8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6025,7 +6025,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit Game :(
+  m_text: Quit Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

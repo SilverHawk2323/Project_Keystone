@@ -13,6 +13,7 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
     public GameState state;
+    private GameState lastGameState;
     public EnemyAI enemyAI;
     private float timer;
     public List<UnitBase> friendlyUnits = new List<UnitBase>();
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     
 
     public bool isGameOver = false;
+    private bool gamePaused;
     public PlayerManager playerManager;
 
     [Header("UI Variables")]
@@ -49,7 +51,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
-        if(!isGameOver || state != GameState.Pause)
+        if(!gamePaused)//!isGameOver || state != GameState.Pause)
         {
             TimerCountDown();
             timerText.text = "Timer: " + Mathf.Round(timer); //* 100) / 100;
@@ -71,8 +73,12 @@ public class GameManager : MonoBehaviour
                     SetGameStateToDeploy();
                     break;
             }
+            return;
         }
-        
+        if(state == GameState.Pause)
+        {
+            SetGameStateToPause();
+        }
     }
 
     public void StartGame()
@@ -83,6 +89,7 @@ public class GameManager : MonoBehaviour
     public void SetGameStateToDeploy()
     {
         state = GameState.Deploy;
+        gamePaused = false;
         gameStateText.text = "State: " + state;
         timer = 60f;
         endTurnButton.gameObject.SetActive(true);
@@ -94,6 +101,7 @@ public class GameManager : MonoBehaviour
     public void SetGameStateToBattle()
     {
         state = GameState.Battle;
+        gamePaused = false;
         gameStateText.text = "State: " + state;
         timer = 15f;
         endTurnButton.gameObject.SetActive(false);
@@ -101,7 +109,18 @@ public class GameManager : MonoBehaviour
 
     public void SetGameStateToPause()
     {
+        /*if(state == GameState.Pause)
+        {
+            state = lastGameState;
+            pauseMenu.SetActive(false);
+            SetGUI(true);
+            return;
+        }
+        lastGameState = state;
+        state = GameState.Pause;*/
         pauseMenu.SetActive(true);
+        gamePaused = true;
+        SetGUI(false);
         SetCursor(true);
         //timer = 0f;
     }

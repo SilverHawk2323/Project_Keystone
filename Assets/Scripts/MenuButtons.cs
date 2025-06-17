@@ -31,4 +31,11 @@ public class MenuButtons : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
         GameManager.gm.SetCursor(true);
     }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("BattleLevel");
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
 }
