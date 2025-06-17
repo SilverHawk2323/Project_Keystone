@@ -123,13 +123,14 @@ GameObject:
   - component: {fileID: 1319440705445174539}
   - component: {fileID: 6920347360775363078}
   - component: {fileID: 4553250548977934312}
+  - component: {fileID: 7025127152978637894}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3998136630266789368
 RectTransform:
   m_ObjectHideFlags: 0
@@ -215,6 +216,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7025127152978637894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149249446405401770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e412d17bcaceeaf49862c0774986bbf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthbarSlider: {fileID: 2946570722731429139}
 --- !u!1 &1460043123755564772
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +239,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4941379309383189372}
   - component: {fileID: 2946570722731429139}
-  - component: {fileID: 3442672366775789856}
   m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
@@ -306,20 +319,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3442672366775789856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1460043123755564772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e412d17bcaceeaf49862c0774986bbf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _reduceSpeed: 2
-  healthbarSlider: {fileID: 2946570722731429139}
 --- !u!1 &1917778569519933634
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,7 +352,7 @@ RectTransform:
   m_Father: {fileID: 7305174433053225599}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -428,7 +427,7 @@ RectTransform:
   m_Father: {fileID: 3517421364161866544}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -743,7 +742,7 @@ MonoBehaviour:
   maxHealth: 3
   currentShield: 2
   maxShield: 2
-  _healthbar: {fileID: 3442672366775789856}
+  healthbar: {fileID: 7025127152978637894}
   movementSpeed: 5
   _movementMode: 0
   attackInfo:

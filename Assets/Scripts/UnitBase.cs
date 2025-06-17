@@ -17,7 +17,7 @@ public class UnitBase : MonoBehaviour
     [SerializeField] private float maxHealth;
     [SerializeField] private float currentShield;
     [SerializeField] private float maxShield;
-    //[SerializeField] private HealthBar _healthbar;
+    [SerializeField] private HealthBar healthbar;
     
     [Header("Speed Variables")]
     [SerializeField] private float movementSpeed;
@@ -65,8 +65,8 @@ public class UnitBase : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
-        /*_healthbar.healthbarSlider.maxValue = maxHealth;
-        _healthbar.UpdateHealthBar(currentHealth);*/
+        healthbar.healthbarSlider.maxValue = maxHealth + maxShield;
+        healthbar.UpdateHealthBar(currentHealth);
         CommandBaseUnit[] bases = FindObjectsByType<CommandBaseUnit>(FindObjectsSortMode.None);
         for (int i = 0; i < bases.Length; i++)
         {
@@ -76,6 +76,7 @@ public class UnitBase : MonoBehaviour
                 break;
             }
         }
+        
         movementModeProperty = _movementMode;
     }
 
@@ -100,6 +101,7 @@ public class UnitBase : MonoBehaviour
         }
         if(targets.Count <= 0)
         {
+            //if there are no enemies nearby go attack the base
             movementModeProperty = MovementModes.Running;
             _agent.destination = enemyBase.transform.position;
             if (Vector3.Distance(_agent.destination, transform.position) < attackInfo.damageRange + 2)
@@ -110,6 +112,7 @@ public class UnitBase : MonoBehaviour
         }
         else
         {
+            //if there's an enemy nearby attack the first enemy in the list
             _agent.destination = targets[0].transform.position;
             if (Vector3.Distance(_agent.destination, transform.position) <= attackInfo.damageRange)
             {
@@ -152,12 +155,14 @@ public class UnitBase : MonoBehaviour
                 //else just deal damage to the shields
                 currentShield -= info.damageAmount;
             }
+            healthbar.UpdateHealthBar(currentHealth + currentShield);
             return;
         }
 
 
 
         currentHealth -= ProcessedDamage(info.damageType, info.damageAmount);
+        healthbar.UpdateHealthBar(currentHealth);
         if (currentHealth <= 0f)
         {
             isDead = true;

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private float _reduceSpeed = 2f;
+    private float _reduceSpeed = 80f;
     public Slider healthbarSlider;
     private float target;
 

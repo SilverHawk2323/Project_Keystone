@@ -69,7 +69,7 @@ RectTransform:
   m_Father: {fileID: 4235408222919399666}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -234,13 +234,14 @@ GameObject:
   - component: {fileID: 806251037463630253}
   - component: {fileID: 2896881287532392774}
   - component: {fileID: 5433636998779722486}
+  - component: {fileID: 8850645709078277698}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9157234029961182864
 RectTransform:
   m_ObjectHideFlags: 0
@@ -326,6 +327,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8850645709078277698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4183616541144443642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e412d17bcaceeaf49862c0774986bbf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _reduceSpeed: 200
+  healthbarSlider: {fileID: 4942556904627062101}
 --- !u!1 &5078672113172820100
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +374,7 @@ RectTransform:
   m_Father: {fileID: 4767075428942774462}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -549,6 +564,7 @@ MonoBehaviour:
   maxHealth: 10
   currentShield: 0
   maxShield: 0
+  healthbar: {fileID: 8850645709078277698}
   movementSpeed: 0
   _movementMode: 0
   attackInfo:
@@ -810,7 +826,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8029028767978347304}
   - component: {fileID: 4942556904627062101}
-  - component: {fileID: 1916524877386211249}
   m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
@@ -891,17 +906,3 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1916524877386211249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8401693864170219248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e412d17bcaceeaf49862c0774986bbf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _reduceSpeed: 2
-  healthbarSlider: {fileID: 4942556904627062101}

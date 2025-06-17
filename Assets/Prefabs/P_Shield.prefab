@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8410078921949488588}
   - component: {fileID: 4356934559463775079}
-  - component: {fileID: 1644162185313982744}
   m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
@@ -91,20 +90,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1644162185313982744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 361767922376005130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e412d17bcaceeaf49862c0774986bbf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _reduceSpeed: 2
-  healthbarSlider: {fileID: 4356934559463775079}
 --- !u!1 &2806211879517375522
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +342,7 @@ RectTransform:
   m_Father: {fileID: 2896344048206566084}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -411,13 +396,14 @@ GameObject:
   - component: {fileID: 7955095045392359125}
   - component: {fileID: 5098875995194926078}
   - component: {fileID: 928720541501449}
+  - component: {fileID: 4287928444758527809}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &783184581114260721
 RectTransform:
   m_ObjectHideFlags: 0
@@ -503,6 +489,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4287928444758527809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3862027806125272206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e412d17bcaceeaf49862c0774986bbf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthbarSlider: {fileID: 4356934559463775079}
 --- !u!1 &5273606060598494669
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,7 +610,7 @@ RectTransform:
   m_Father: {fileID: 2258240869457514664}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -887,7 +886,7 @@ MonoBehaviour:
   maxHealth: 2
   currentShield: 10
   maxShield: 10
-  _healthbar: {fileID: 1644162185313982744}
+  healthbar: {fileID: 4287928444758527809}
   movementSpeed: 3
   _movementMode: 0
   attackInfo:
