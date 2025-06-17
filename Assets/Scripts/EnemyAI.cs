@@ -9,7 +9,11 @@ public class EnemyAI : MonoBehaviour
     [ContextMenu("Spawn Enemy")]
     public void SpawnEnemy()
     {
-        var unitSpawned = Instantiate(units[Random.Range(0, units.Length)], spawnLocations[Random.Range(0, spawnLocations.Count)]);
-        unitSpawned.SetTeamNumber(2);
+        for (int i = 0; i < spawnLocations.Count; i++)
+        {
+
+            var unitSpawned = Instantiate(units[Random.Range(0, units.Length)], spawnLocations[Random.Range(0, spawnLocations.Count)]);
+            unitSpawned.SetTeamNumber(2);
+        }
     }
 }

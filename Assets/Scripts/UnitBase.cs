@@ -66,7 +66,7 @@ public class UnitBase : MonoBehaviour
             currentHealth = maxHealth;
         }
         healthbar.healthbarSlider.maxValue = maxHealth + maxShield;
-        healthbar.UpdateHealthBar(currentHealth);
+        healthbar.UpdateHealthBar(currentHealth + currentShield);
         CommandBaseUnit[] bases = FindObjectsByType<CommandBaseUnit>(FindObjectsSortMode.None);
         for (int i = 0; i < bases.Length; i++)
         {
