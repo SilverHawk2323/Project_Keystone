@@ -94,12 +94,14 @@ public class NewControlManager : MonoBehaviour
         if (GameManager.gm.pauseMenu.activeInHierarchy)
         {
             GameManager.gm.pauseMenu.SetActive(false);
-            GameManager.gm.state = _lastGameState;
+            Time.timeScale = 1.0f;
+            GameManager.gm.GUI.SetActive(true);
         }
         else
         {
-            _lastGameState = GameManager.gm.state;
-            GameManager.gm.state = GameState.Pause;
+            GameManager.gm.pauseMenu.SetActive(true);
+            GameManager.gm.GUI.SetActive(false);
+            Time.timeScale = 0f;
         }
             
     }

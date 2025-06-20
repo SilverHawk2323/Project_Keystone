@@ -61,15 +61,18 @@ public class GameManager : MonoBehaviour
             switch (state)
             {
                 case GameState.Deploy:
+                    Time.timeScale = 1f;
                     SetGameStateToBattle();
                     break;
                 case GameState.Battle:
+                    Time.timeScale = 1f;
                     SetGameStateToDeploy();
                     break;
                 case GameState.Pause:
                     SetGameStateToPause();
                     break;
                 default:
+                    Time.timeScale = 1f;
                     SetGameStateToDeploy();
                     break;
             }
@@ -105,6 +108,7 @@ public class GameManager : MonoBehaviour
         gameStateText.text = "State: " + state;
         timer = 15f;
         endTurnButton.gameObject.SetActive(false);
+        playerManager.BattlePhase();
     }
 
     public void SetGameStateToPause()
@@ -119,7 +123,7 @@ public class GameManager : MonoBehaviour
         lastGameState = state;
         state = GameState.Pause;*/
         pauseMenu.SetActive(true);
-        gamePaused = true;
+        Time.timeScale = 0f;
         SetGUI(false);
         SetCursor(true);
         //timer = 0f;
@@ -138,14 +142,14 @@ public class GameManager : MonoBehaviour
         {
             winScreen.SetActive(true);
             SetCursor(true);
-            state = GameState.Pause;
+            Time.timeScale = 0f;
             isGameOver = true;
         }
         else
         {
             loseScreen.SetActive(true);
             SetCursor(true);
-            state = GameState.Pause;
+            Time.timeScale = 0f;
             isGameOver = true;
         }
     }
@@ -168,5 +172,13 @@ public class GameManager : MonoBehaviour
     {
         GUI.SetActive(visibility);
         SetCursor(true);
+    }
+
+    private void OnDestroy()
+    {
+        if(gm == this)
+        {
+            gm = null;
+        }
     }
 }

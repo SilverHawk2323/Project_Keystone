@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -65,5 +66,46 @@ public class PlayerManager : MonoBehaviour
         currentResources = maxResources;
         maxResources++;
         maxResources = Mathf.Clamp(maxResources, 4, 10);
+        foreach (CardBase card in cardsInHand)
+        {
+            TextMeshProUGUI text = card.GetComponentInChildren<TextMeshProUGUI>();
+            if (card is WarriorCard)
+            {
+                text.text = "Warrior Unit costs 1\n Spawns Warrior";
+            }
+            if (card is ShieldCard)
+            {
+                text.text = "Shield Unit costs 3\n Spawns Shield";
+            }
+            if (card is RangerCard)
+            {
+                text.text = "Ranger Unit costs 2\n Spawns Ranger ";
+            }
+        }
+    }
+
+    public void BattlePhase()
+    {
+        foreach(var card in cardsInHand)
+        {
+            if (card == null)
+            {
+                continue;
+            }
+            TextMeshProUGUI text = card.GetComponentInChildren<TextMeshProUGUI>();
+            if(card is WarriorCard)
+            {
+                text.text = "Warrior Unit costs 1\n Increases the damage of all friendly units by 1";
+            }
+            if(card is ShieldCard)
+            {
+                text.text = "Shield Unit costs 3\n Adds 4 shields to all friendly units";
+            }
+            if(card is RangerCard)
+            {
+                text.text = "Ranger Unit costs 2\n Multiplies the attack speed for all friendly units by 2";
+            }
+            
+        }
     }
 }
